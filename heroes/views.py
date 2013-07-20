@@ -14,28 +14,16 @@ from flask.views import MethodView
 
 from heroes import app
 @app.route('/')
-def hello_world(name=None):
-    return render_template("home.html", name=name)
+def home():
+    return render_template("home.html")
 
-@app.route('/map')
-def map(name=None):
-    return render_template("home.html", name=name)
-
-@app.route('/view')
-def viewgift(name=None):
-    return render_template("home.html", name=name)
-
-@app.route('/add')
-def addpost(name=None):
-    return render_template("home.html", name=name)
-
-@app.route('/tour')
-def tour(name=None):
-    return render_template("home.html", name=name)
+@app.route('/heroes/open')
+def curated_messages():
+    return render_template("curated_messages.html")
 
 @app.route('/theme')
-def show_theme(name=None):
-    return render_template("theme.html", name=name)
+def show_theme():
+    return render_template("theme.html")
 
 @app.errorhandler(404)
 def page_not_found(e):
