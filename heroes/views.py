@@ -1,4 +1,3 @@
-
 import jinja2
 from flask import render_template, flash, url_for, redirect
 from flask.ext import wtf
@@ -10,12 +9,37 @@ import logging
 from flask import Blueprint, request, redirect, render_template, url_for
 from flask.views import MethodView
 
-#posts = Blueprint('posts', __name__, template_folder='templates')
-
 from heroes import app
 @app.route('/')
 def hello_world(name=None):
     return render_template("home.html", name=name)
+
+@app.route('/heroes')
+def heroes(name=None):
+    return render_template("heroes.html", name=name)
+
+@app.route('/heroes/<id>')
+def hero_id(name=None):
+    return render_template("hero_id.html", name=name)
+
+@app.route('/heroes/all')
+def heroes_all(name=None):
+    return render_template("heroes_all.html", name=name)
+
+@app.route('/heroes/open')
+def curated_messages(name=None):
+    return render_template("curated_messages.html", name=name)
+
+@app.route('/supporters')
+def supporters(name=None):
+    return render_template("supporters.html", name=name)
+
+@app.route('/supporters/message')
+def post_message(name=None):
+    return render_template("post_message.html", name=name)
+
+
+# BELOW STUFF MAY NOT BE USED
 
 @app.route('/map')
 def map(name=None):
@@ -33,9 +57,12 @@ def addpost(name=None):
 def tour(name=None):
     return render_template("home.html", name=name)
 
+
+# DEMO OF THE FLAT-UI KIT
+
 @app.route('/theme')
 def show_theme(name=None):
-    return render_template("theme.html", name=name)
+    return render_template("flat-ui-kit.html", name=name)
 
 @app.errorhandler(404)
 def page_not_found(e):
