@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row-fluid">
+      <div class="span12">
+        <h1>
+          John Doe (id: {{ id }})
+        </h1>
+      </div>
+    </div>
+
+      <div class="row-fluid">
+        <div class="span12">
+        <div class="span3">
+          <img src="/static/images/faces/02.jpg" alt="" />
+        </div>
+        <div class="span6">
+
+          <h6>
+            Branch: Marines<br />
+            Rank: Sergeant<br />
+            Hometown: NYC<br />
+          </h6>
+        </div>
+        <div class="span3">
+
+<div class="invite-form">
+  <h3>Invite More Supporters</h3>
+    <div class="control-group">
+    <input type="text" class="span6" value="" placeholder="Email Address" id="email" />
+  </div>
+  <a class="btn btn-primary btn-large btn-block" href="invite.html">Invite</a>
+</div>
+          {% include "includes/add.post.html" %}
+          {% include "includes/blankline.html" %}
+        </div>
+        </div>
+      </div>
+
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="demo-browser-content">
+            <iframe src="//instagram.com/p/a1e63AJQZd/embed/" width="250" height="300" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+            <iframe src="//instagram.com/p/bcx_pNJQdx/embed/" width="250" height="300" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+            <iframe src="//instagram.com/p/b0cTzeye3A/embed/" width="250" height="300" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+            <iframe src="//instagram.com/p/Xc82N0pQWQ/embed/" width="250" height="300" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+            <br /><br />
+            <img src="/static/images/demo/browser-pic-1.jpg" alt="" />
+            <img src="/static/images/demo/browser-pic-2.jpg" alt="" />
+            <img src="/static/images/demo/browser-pic-3.jpg" alt="" />
+            <img src="/static/images/demo/browser-pic-4.jpg" alt="" />
+            <img src="/static/images/demo/browser-pic-5.jpg" alt="" />
+            <img src="/static/images/demo/browser-pic-6.jpg" alt="" />
+          </div>
+        </div>
+      </div>
+
+    {% include "includes/blankline.html" %}
+    {% include "includes/share.html" %}
+
+{% endblock %}
+
+

@@ -1,4 +1,6 @@
 from flask import render_template, flash, url_for, redirect, request
+import jinja2
+
 from flask.ext import wtf
 from flask.ext.wtf import validators
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -11,7 +13,6 @@ import requests
 
 from instagram import client, subscriptions
 from instagram.models import User
-
 
 #: Database settings
 DBUSER = 'root'  # *************
@@ -61,27 +62,42 @@ class Messages(db.Model):
     text_message = Column(Text(120), unique=False)
     instagram_url = Column(Text(200), unique=False)
 
-#posts = Blueprint('posts', __name__, template_folder='templates')
-
-
-
 @app.route('/')
-def home():
+def hello_world():
     return render_template("home.html")
 
-@app.route('/heroes/open')
-def curated_messages():
-    return render_template("curated_messages.html")
+@app.route('/heroes') # welcome page for heros
+def heroes():
+    return render_template("heroes.html")
 
-@app.route('/theme')
-def show_theme():
-    return render_template("theme.html")
+@app.route('/heroes/<id>')
+def hero_id(id):
+    return render_template("hero_id.html", id=id)
+
+
+@app.route('/heroes/all')
+def heroes_all(name=None):
+    return render_template("heroes_all.html", name=name)
+
+@app.route('/heroes/open') #Curated messages
+def curated_messages(name=None):
+    return render_template("curated_messages.html", name=name)
+
+@app.route('/supporters')
+def supporters(name=None):
+    return render_template("supporters.html", name=name)
+
+@app.route('/supporters/message')
+def post_message(name=None):
+    return render_template("post_message.html", name=name)
+
+def show_theme(name=None):
+    return render_template("flat-ui-kit.html", name=name)
 
 @app.errorhandler(404)
 def page_not_found(e):
     """ Renders 404 Error page """
     return render_template('404.html'), 404
-
 
 @app.route('/heroes/<hero_id>/video', methods=['GET'])
 def upload_video():
@@ -89,16 +105,18 @@ def upload_video():
     User logins into instagram... Selects video from their own profile.
     """
     try:
+        ## this is the connect url
         url = unauthenticated_api.get_authorize_url()
-        return '<a href="%s">Connect with Instagram</a>' % url
+        print '<a href="%s">Connect with Instagram</a>' % url
+        return render_template("hero_addvid.html", authurl=url)
     except Exception, e:
         print e
 
-@app.route('/heroes/<hero_id>/video')
-def choose_video(hero_id, videos):
-    """
-    Select video.
-    """
+# @app.route('/heroes/<hero_id>/video')
+# def choose_video(hero_id, videos):
+#     """
+#     Select video.
+#     """
 
 @app.route('/oauth_callback')
 def on_callback():
@@ -109,7 +127,7 @@ def on_callback():
         access_token = unauthenticated_api.exchange_code_for_access_token(code)
         if not access_token:
             return 'Could not get access token'
-        
+
         api = client.InstagramAPI(access_token=access_token[0])
         user = api.user()
 
@@ -131,7 +149,7 @@ def on_callback():
                 photos.append(link)
 
         return redirect(url_for('choose_video', ))
-        
+
     except Exception, e:
         print e
 
@@ -139,9 +157,9 @@ def on_callback():
 def send_email():
     """Send grid"""
 
-	# make a secure connection to SendGrid
+    # make a secure connection to SendGrid
     s = sendgrid.Sendgrid(
-		'veteranshack',
+    	'veteranshack',
 		'cbs'+'local'+'1',
 		secure=True
 	)
@@ -160,5 +178,5 @@ def send_email():
 		"John Doe"
 	)
 
-	# use the Web API to send your message
+    # use the Web API to send your message
     s.web.send(message)

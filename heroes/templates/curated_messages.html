@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row-fluid">
+      <div class="span12">
+        <h3>Welcome back!</h3>
+      </div> <!-- /demo-headline -->
+    </div>
+      <div class="row-fluid">
+        <div class="span3">
+          &nbsp;
+        </div>
+        <div class="span9">
+              <div class="demo-browser-author"></div>
+
+              <h5>@someguy</h5>
+              <h6>
+                Soldier. Writer. NYC
+                <a href="#link" target="_blank">website</a>
+              </h6>
+            </div>
+            <div class="demo-browser-content">
+              <img src="/static/images/demo/browser-pic-1.jpg" alt="" />
+              <img src="/static/images/demo/browser-pic-2.jpg" alt="" />
+              <img src="/static/images/demo/browser-pic-3.jpg" alt="" />
+              <img src="/static/images/demo/browser-pic-4.jpg" alt="" />
+              <img src="/static/images/demo/browser-pic-5.jpg" alt="" />
+              <img src="/static/images/demo/browser-pic-6.jpg" alt="" />
+            </div>
+
+      </div>
+
+      {% include "includes/share.html" %}
+{% endblock %}
+
+
