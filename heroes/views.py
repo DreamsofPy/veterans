@@ -6,6 +6,7 @@ from flask.ext.wtf import validators
 
 import re
 import logging
+import sendgrid
 
 from flask import Blueprint, request, redirect, render_template, url_for
 from flask.views import MethodView
@@ -29,3 +30,31 @@ def show_theme():
 def page_not_found(e):
     """ Renders 404 Error page """
     return render_template('404.html'), 404
+
+@app.route('/blast', methods=['POST'])
+def send_email():
+    """Send grid"""
+	
+	# make a secure connection to SendGrid
+    s = sendgrid.Sendgrid(
+		'veteranshack',
+		'cbs'+'local'+'1',
+		secure=True
+	)
+
+	# make a message object
+    message = sendgrid.Message(
+		"from@mydomain.com",
+		"message subject",
+		"plaintext message body",
+	    "HTML message body"
+    )
+
+	# add a recipient
+    message.add_to(
+		"someone@example.com",
+		"John Doe"
+	)
+
+	# use the Web API to send your message
+    s.web.send(message)
