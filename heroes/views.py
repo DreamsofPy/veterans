@@ -100,18 +100,20 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 @app.route('/heroes/<hero_id>/video', methods=['GET'])
-def upload_video():
+def upload_video(hero_id):
     """
     User logins into instagram... Selects video from their own profile.
     """
+    url = ""
     try:
         ## this is the connect url
         url = unauthenticated_api.get_authorize_url()
         print '<a href="%s">Connect with Instagram</a>' % url
-        return render_template("hero_addvid.html", authurl=url)
+
     except Exception, e:
         print e
 
+    return render_template("hero_addvid.html", authurl=url)
 # @app.route('/heroes/<hero_id>/video')
 # def choose_video(hero_id, videos):
 #     """
