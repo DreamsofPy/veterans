@@ -32,6 +32,14 @@ DEBUG = True
 
 db = SQLAlchemy(app)
 
+CONFIG = {
+    'client_id': 'c692be924c234456ad1f6081e28cbea4',
+    'client_secret': '28f8d56275a5480f9ba3d7d7d77193c6',
+    'redirect_uri': 'http://localhost:5000/oauth_callback'
+}
+
+unauthenticated_api = client.InstagramAPI(**CONFIG)
+
 # MODELS
 
 class Heroes(db.Model):
@@ -100,23 +108,20 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 @app.route('/heroes/<hero_id>/video', methods=['GET'])
-def upload_video():
+def upload_video(hero_id):
     """
     User logins into instagram... Selects video from their own profile.
     """
+
+    url = unauthenticated_api.get_authorize_url()
     try:
         ## this is the connect url
-        url = unauthenticated_api.get_authorize_url()
         print '<a href="%s">Connect with Instagram</a>' % url
-        return render_template("hero_addvid.html", authurl=url)
     except Exception, e:
         print e
 
-# @app.route('/heroes/<hero_id>/video')
-# def choose_video(hero_id, videos):
-#     """
-#     Select video.
-#     """
+
+    return render_template("hero_addvid.html", authurl=url) 
 
 @app.route('/oauth_callback')
 def on_callback():
