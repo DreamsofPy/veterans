@@ -396,7 +396,8 @@ you can use the generic selector below, but it's slower:
   -moz-border-radius: 0 0 6px;
   border-radius: 0 0 6px;
 }
-.demo-browser-content > img {
+.demo-browser-content > img,
+.demo-browser-content > a > img {
   border: 6px solid #ffffff;
   /*float: left;*/
   margin: 0 10px 20px 10px;
@@ -556,6 +557,7 @@ h6 {
 }
 .btn.btn-info {
   background-color: #3498db;
+  margin-bottom: 3px;
 }
 .btn.btn-info:hover,
 .btn.btn-info:focus,
@@ -608,6 +610,7 @@ h6 {
 }
 .btn.btn-inverse {
   background-color: #34495e;
+  margin-bottom:2px;
 }
 .btn.btn-inverse:hover,
 .btn.btn-inverse:focus,

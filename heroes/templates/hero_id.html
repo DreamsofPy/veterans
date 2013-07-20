@@ -4,7 +4,7 @@
     <div class="row-fluid">
       <div class="span12">
         <h1>
-          Hero Id = {{ id }}
+          John Doe (id: {{ id }})
         </h1>
       </div>
     </div>
@@ -15,15 +15,24 @@
           <img src="/static/images/faces/02.jpg" alt="" />
         </div>
         <div class="span6">
-          <h5>First Last</h5>
+
           <h6>
-            Branch: Army<br />
-            Rank: Sargeant<br />
+            Branch: Marines<br />
+            Rank: Sergeant<br />
             Hometown: NYC<br />
           </h6>
         </div>
         <div class="span3">
-          {% include "includes/share.html" %}
+
+<div class="invite-form">
+  <h3>Invite More Supporters</h3>
+    <div class="control-group">
+    <input type="text" class="span6" value="" placeholder="Email Address" id="email" />
+  </div>
+  <a class="btn btn-primary btn-large btn-block" href="invite.html">Invite</a>
+</div>
+          {% include "includes/add.post.html" %}
+          {% include "includes/blankline.html" %}
         </div>
         </div>
       </div>
