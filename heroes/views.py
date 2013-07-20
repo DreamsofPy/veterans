@@ -11,16 +11,20 @@ from flask.views import MethodView
 
 from heroes import app
 @app.route('/')
-def hello_world(name=None):
-    return render_template("home.html", name=name)
+def hello_world():
+    return render_template("home.html")
 
 @app.route('/heroes') # welcome page for heros
-def heroes(name=None):
-    return render_template("heroes.html", name=name)
+def heroes():
+    return render_template("heroes.html")
 
 @app.route('/heroes/<id>')
-def hero_id(name=None):
-    return render_template("hero_id.html", name=name)
+def hero_id(id):
+    return render_template("hero_id.html", id=id)
+
+@app.route('/heroes/<id>/add-video')
+def hero_addvid(name=None):
+    return render_template("hero_addvid.html", name=name)
 
 @app.route('/heroes/all')
 def heroes_all(name=None):

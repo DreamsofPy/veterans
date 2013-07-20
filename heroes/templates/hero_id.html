@@ -3,14 +3,52 @@
 {% block content %}
     <div class="row-fluid">
       <div class="span12">
-        <div class="demo-headline">
-        <h1 class="demo-logo">
-          <div class="logo"></div>
-          Hero &lt;id&gt;
+        <h1>
+          Hero Id = {{ id }}
         </h1>
-      </div> <!-- /demo-headline -->
       </div>
     </div>
+
+      <div class="row-fluid">
+        <div class="span12">
+        <div class="span3">
+          <img src="/static/images/faces/02.jpg" alt="" />
+        </div>
+        <div class="span6">
+          <h5>First Last</h5>
+          <h6>
+            Branch: Army<br />
+            Rank: Sargeant<br />
+            Hometown: NYC<br />
+          </h6>
+        </div>
+        <div class="span3">
+          {% include "includes/share.html" %}
+        </div>
+        </div>
+      </div>
+
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="demo-browser-content">
+            <iframe src="//instagram.com/p/a1e63AJQZd/embed/" width="250" height="300" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+            <iframe src="//instagram.com/p/bcx_pNJQdx/embed/" width="250" height="300" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+            <iframe src="//instagram.com/p/b0cTzeye3A/embed/" width="250" height="300" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+            <iframe src="//instagram.com/p/Xc82N0pQWQ/embed/" width="250" height="300" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+            <br /><br />
+            <img src="/static/images/demo/browser-pic-1.jpg" alt="" />
+            <img src="/static/images/demo/browser-pic-2.jpg" alt="" />
+            <img src="/static/images/demo/browser-pic-3.jpg" alt="" />
+            <img src="/static/images/demo/browser-pic-4.jpg" alt="" />
+            <img src="/static/images/demo/browser-pic-5.jpg" alt="" />
+            <img src="/static/images/demo/browser-pic-6.jpg" alt="" />
+          </div>
+        </div>
+      </div>
+
+    {% include "includes/blankline.html" %}
+    {% include "includes/share.html" %}
+
 {% endblock %}
 
 

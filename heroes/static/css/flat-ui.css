@@ -398,8 +398,8 @@ you can use the generic selector below, but it's slower:
 }
 .demo-browser-content > img {
   border: 6px solid #ffffff;
-  float: left;
-  margin: 0 15px 20px 0;
+  /*float: left;*/
+  margin: 0 10px 20px 10px;
   width: 134px;
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 2) {
@@ -1587,7 +1587,7 @@ input[type="color"].flat:focus,
 .control-group input[type="tel"],
 .control-group input[type="color"],
 .control-group .uneditable-input {
-  margin-bottom: 0;
+  /*margin-bottom: 0;*/
 }
 .control-group {
   position: relative;
@@ -3868,3 +3868,5 @@ body.vjs-full-window {
 .mal {
   margin-left: 20px;
 }
+
+#herogallery img{margin:5px 2px;}
