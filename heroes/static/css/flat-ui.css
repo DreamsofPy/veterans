@@ -191,7 +191,7 @@ you can use the generic selector below, but it's slower:
   line-height: 100px;
 }
 .demo-logo .logo {
-  background: url(http://rlv.zcache.com/american_flag_heart_sticker-r3e3ef30a3e214abba55e88805a2f5798_v9w0n_8byvr_512.jpg) center 0 no-repeat;
+  background: url(/static/images/heart.jpg) center 0 no-repeat;
   background-size: 256px 200px;
   height: 186px;
   margin: 0 auto 26px;
