@@ -4,7 +4,7 @@
     <div class="row-fluid">
       <div class="span12">
         <h1>
-          John Doe (id: {{ id }})
+          John Doe
         </h1>
       </div>
     </div>
@@ -40,6 +40,9 @@
       <div class="row-fluid">
         <div class="span12">
           <div class="demo-browser-content">
+            {% for p in videos %}
+            <iframe src="{{ p }}embed/" width="250" height="300" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
+            {% endfor %}
             <iframe src="//instagram.com/p/a1e63AJQZd/embed/" width="250" height="300" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
             <iframe src="//instagram.com/p/bcx_pNJQdx/embed/" width="250" height="300" frameborder="0" scrolling="no" allowtransparency="true"></iframe>
             <iframe src="//instagram.com/p/b0cTzeye3A/embed/" width="250" height="300" frameborder="0" scrolling="no" allowtransparency="true"></iframe>

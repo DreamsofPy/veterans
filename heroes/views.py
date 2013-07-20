@@ -32,6 +32,14 @@ DEBUG = True
 
 db = SQLAlchemy(app)
 
+CONFIG = {
+    'client_id': 'c692be924c234456ad1f6081e28cbea4',
+    'client_secret': '28f8d56275a5480f9ba3d7d7d77193c6',
+    'redirect_uri': 'http://localhost:5000/oauth_callback'
+}
+
+unauthenticated_api = client.InstagramAPI(**CONFIG)
+
 # MODELS
 
 class Heroes(db.Model):
@@ -104,21 +112,15 @@ def upload_video(hero_id):
     """
     User logins into instagram... Selects video from their own profile.
     """
-    url = ""
+    url = unauthenticated_api.get_authorize_url()
     try:
         ## this is the connect url
-        url = unauthenticated_api.get_authorize_url()
         print '<a href="%s">Connect with Instagram</a>' % url
 
     except Exception, e:
         print e
 
     return render_template("hero_addvid.html", authurl=url)
-# @app.route('/heroes/<hero_id>/video')
-# def choose_video(hero_id, videos):
-#     """
-#     Select video.
-#     """
 
 @app.route('/oauth_callback')
 def on_callback():
@@ -150,7 +152,8 @@ def on_callback():
             else:
                 photos.append(link)
 
-        return redirect(url_for('choose_video', ))
+        return render_template("hero_id.html", photos=photos[:1], videos=videos[:2])
+        #return redirect(url_for('choose_video', ))
 
     except Exception, e:
         print e
