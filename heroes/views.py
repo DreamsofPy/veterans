@@ -7,10 +7,15 @@ from sqlalchemy import Column, Integer, String, Text, ForeignKey
 from heroes import app
 
 import sendgrid
+import requests
+
+from instagram import client, subscriptions
+from instagram.models import User
+
 
 #: Database settings
-DBUSER = 'neo'  # *************
-DBPASS = 'mysql'  # *************
+DBUSER = 'root'  # *************
+DBPASS = ''  # *************
 DBHOST = 'localhost'  # host ip or localhost
 DBNAME = 'veterans'  # database name
 DB = 'mysql'  # sqlite / mysql/ postgresql
@@ -76,6 +81,59 @@ def show_theme():
 def page_not_found(e):
     """ Renders 404 Error page """
     return render_template('404.html'), 404
+
+
+@app.route('/heroes/<hero_id>/video', methods=['GET'])
+def upload_video():
+    """
+    User logins into instagram... Selects video from their own profile.
+    """
+    try:
+        url = unauthenticated_api.get_authorize_url()
+        return '<a href="%s">Connect with Instagram</a>' % url
+    except Exception, e:
+        print e
+
+@app.route('/heroes/<hero_id>/video')
+def choose_video(hero_id, videos):
+    """
+    Select video.
+    """
+
+@app.route('/oauth_callback')
+def on_callback():
+    code = request.args.get("code")
+    if not code:
+        return 'Missing code'
+    try:
+        access_token = unauthenticated_api.exchange_code_for_access_token(code)
+        if not access_token:
+            return 'Could not get access token'
+        
+        api = client.InstagramAPI(access_token=access_token[0])
+        user = api.user()
+
+        data = {
+            'access_token': access_token[0],
+        }
+        url = 'https://api.instagram.com/v1/users/%s/media/recent' % user.id
+        r = requests.get(url, params=data)
+        r = r.json()
+
+        photos = []
+        videos = []
+        for media in r.get('data'):
+            media_type = media.get('type')
+            link = media.get('link')
+            if media_type == 'video':
+                videos.append(link)
+            else:
+                photos.append(link)
+
+        return redirect(url_for('choose_video', ))
+        
+    except Exception, e:
+        print e
 
 @app.route('/blast', methods=['POST'])
 def send_email():
