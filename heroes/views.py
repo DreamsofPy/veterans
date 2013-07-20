@@ -14,7 +14,7 @@ from heroes import app
 def hello_world(name=None):
     return render_template("home.html", name=name)
 
-@app.route('/heroes')
+@app.route('/heroes') # welcome page for heros
 def heroes(name=None):
     return render_template("heroes.html", name=name)
 
@@ -26,7 +26,7 @@ def hero_id(name=None):
 def heroes_all(name=None):
     return render_template("heroes_all.html", name=name)
 
-@app.route('/heroes/open')
+@app.route('/heroes/open') #Curated messages
 def curated_messages(name=None):
     return render_template("curated_messages.html", name=name)
 
