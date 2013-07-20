@@ -6,12 +6,24 @@ from sqlalchemy import Column, Integer, String, Text, ForeignKey
 
 from heroes import app
 
-SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/test.db'
-SQLALCHEMY_ECHO = False
+#: Database settings
+DBUSER = 'neo'  # *************
+DBPASS = 'mysql'  # *************
+DBHOST = 'localhost'  # host ip or localhost
+DBNAME = 'veterans'  # database name
+DB = 'mysql'  # sqlite / mysql/ postgresql
+
+#: database configuration
+SQLALCHEMY_DATABASE_URI = DB + '://' + DBUSER + ':' + DBPASS + '@' + \
+                          DBHOST + '/' + DBNAME
+app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
+
+SQLALCHEMY_ECHO = True
 SECRET_KEY = '\xfb\x12\xdf\xa1@i\xd6>V\xc0\xbb\x8fp\x16#Z\x0b\x81\xeb\x16'
 DEBUG = True
 
 db = SQLAlchemy(app)
+
 
 # MODELS
 
@@ -44,6 +56,7 @@ class Messages(db.Model):
     instagram_url = Column(Text(200), unique=False)
 
 #posts = Blueprint('posts', __name__, template_folder='templates')
+
 
 
 @app.route('/')
